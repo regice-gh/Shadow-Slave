@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Folder Include="Security\" />
+    <Folder Include="Repository\" />
     <Folder Include="Repository\" />
     <Folder Include="Security\" />
   </ItemGroup>
