@@ -1,0 +1,6 @@
+@ShadowSlaveAPI_HostAddress = http://localhost:5065
+
+GET {{ShadowSlaveAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Shadow Slave/Shadow Slave.csproj" />
+  <Project Path="ShadowSlave.Shared/ShadowSlave.Shared.csproj" />
+  <Project Path="ShadowSlaveAPI/ShadowSlave.API.csproj" />
+  <Project Path="ShadowSlaveData/ShadowSlave.Data.csproj" />
+</Solution>
