@@ -9,5 +9,6 @@
         public Location? Location { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsAnchored { get; set; }
+        public List<Awakened>? Awakeneds { get; set; }
     }
 }
