@@ -1,0 +1,51 @@
+﻿@page "/game"
+@using ShadowSlave.Shared.Helpers
+@using Shadow_Slave.service.Interfaces
+@using Shadow_Slave.service
+@inject IMapService MapService
+
+<div class="game-container" @onkeydown="HandleKeyDown" tabindex="0">
+    <div class="grid">
+        @for (int y = 0; y < 10; y++)
+        {
+            <div class="row">
+                @for (int x = 0; x < 20; x++)
+                {
+                    var currentX = x;
+                    var currentY = y;
+                    <span class="tile" style="color: @GetTileColor(currentX, currentY)">
+                        @GetTileSymbol(currentX, currentY)
+                    </span>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .game-container { outline: none; background: #050505; padding: 20px; font-family: monospace; }
+    .row { display: flex; line-height: 1; }
+    .tile { width: 20px; height: 20px; text-align: center; font-size: 1.2rem; }
+</style>
+
+@code {
+    private char GetTileSymbol(int x, int y)
+    {
+        if (x == MapService.PlayerPos.X && y == MapService.PlayerPos.Y) return '@';
+        return MapService.GetMap()[x, y].Symbol;
+    }
+
+    private string GetTileColor(int x, int y)
+    {
+        if (x == MapService.PlayerPos.X && y == MapService.PlayerPos.Y) return "gold";
+        return MapService.GetMap()[x, y].Color;
+    }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "w") MapService.MovePlayer(0, -1);
+        if (e.Key == "s") MapService.MovePlayer(0, 1);
+        if (e.Key == "a") MapService.MovePlayer(-1, 0);
+        if (e.Key == "d") MapService.MovePlayer(1, 0);
+    }
+}

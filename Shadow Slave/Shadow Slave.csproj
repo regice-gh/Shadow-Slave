@@ -9,4 +9,9 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShadowSlave.Shared\ShadowSlave.Shared.csproj" />
+    <ProjectReference Include="..\ShadowSlaveAPI\ShadowSlave.API.csproj" />
+  </ItemGroup>
+
 </Project>
