@@ -32,6 +32,10 @@ namespace ShadowSlave.Shared.Models
         public int? ClanId { get; set; }
         public Clan? Clan { get; set; }
 
+        //anchor
+        public int? GatewayId { get; set; }
+        public Gateway? Gateway { get; set; }
+
         // Inventory & Summons
         public int MemoryId { get; set; }
         public List<Memory>? Memories { get; set; } // An Awakened can have multiple Memories (inventory)
