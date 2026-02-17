@@ -1,27 +1,35 @@
-﻿namespace ShadowSlave.Shared.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ShadowSlave.Shared.Models
 {
     public class Enchantment
     {
+        [Key]
         public int Id { get; set; }
 
-        // The name of the enchantment (e.g., [Unbroken], [Underworld Armament])
+        [Required]
+        [MaxLength(100)]
         public string Name { get; set; } = string.Empty;
 
-        // The lore description of what the enchantment does.
+        [Required]
+        [MaxLength(1000)]
         public string Description { get; set; } = string.Empty;
 
-        // Source: [4] - "Only the weakest enchantments could be activated passively... 
-        // everything else would only function when saturated by the flow of essence."
-        public bool IsPassive { get; set; }
+        // --- Essence Mechanics ---
+        public bool IsPassive { get; set; } = true;
 
-        // Some enchantments, like [King's Resentment] or [Cursed], have negative effects.
-        // Source: [6], [7]
-        public bool IsCurse { get; set; }
+        [Range(0, 500)]
+        public int EssenceActivationCost { get; set; } = 0;
 
-        // Foreign Key: The Tier of the Memory dictates how many enchantments it can hold.
-        // A Tier 4 Memory can hold more enchantments than a Tier 1.
-        // Source: [8]
+        // --- Logic Tier Flags ---
+        public bool IsCurse { get; set; } = false;
+
+        // --- N-Tier / Database Relationships ---
+        [Required]
         public int MemoryId { get; set; }
-        public Memory? Memory { get; set; }
+
+        [ForeignKey("MemoryId")]
+        public virtual Memory? Memory { get; set; }
     }
 }

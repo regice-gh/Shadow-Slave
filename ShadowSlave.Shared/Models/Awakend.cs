@@ -1,45 +1,61 @@
 ﻿using ShadowSlave.Shared.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShadowSlave.Shared.Models
 {
     public class Awakened
     {
+        [Key]
         public int Id { get; set; }
 
-        // Basic Info
-        public string Name { get; set; } = string.Empty; // e.g., "Sunless"
+        // --- Basic Info ---
+        [Required]
+        [MaxLength(50)]
+        public string Name { get; set; } = string.Empty;
 
-        // Source: [4], [5] - True Names give power and influence fate.
-        public string? TrueName { get; set; } // Nullable (e.g., "Lost from Light")
+        [MaxLength(100)]
+        public string? TrueName { get; set; }
 
-        // Progression Stats
-        public SoulRank Rank { get; set; } // e.g., Transcendent
-        public SoulClass Class { get; set; } // e.g., Terror (for Divine Aspect holders)
+        // --- Progression Stats ---
+        [Required]
+        public SoulRank Rank { get; set; } = SoulRank.Dormant;
 
-        // Source: [6], [7] - Fragments determine progress to next rank/class.
-        public int SoulFragments { get; set; }
-        public int MaxFragments { get; set; } // 1000, 2000, etc.
-        public int SoulCores { get; set; } // 1 for normal, up to 7 for Divine Aspects [8]
+        [Required]
+        public SoulClass Class { get; set; } = SoulClass.Beast;
 
-        // Navigation Properties (Foreign Keys)
+        [Range(0, 100000)]
+        public int SoulFragments { get; set; } = 0;
+        public int MaxFragments => (int)Rank * 1000;
+
+        [Range(1, 7)]
+        public int SoulCores { get; set; } = 1;
+
+        // --- Essence System ---
+        public int CurrentEssence { get; set; }
+        public int MaxEssence => SoulCores * 100; // Each Soul Core grants 100 Essence. This is a simple formula, but you can expand it with bonuses from Aspects, Flaws, or Memory traits later on.
+
+        // --- Navigation Properties ---
+        [Required]
         public int AspectId { get; set; }
-        public Aspect? Aspect { get; set; }
+        [ForeignKey("AspectId")]
+        public virtual Aspect? Aspect { get; set; }
 
+        [Required]
         public int FlawId { get; set; }
-        public Flaw? Flaw { get; set; }
+        [ForeignKey("FlawId")]
+        public virtual Flaw? Flaw { get; set; }
 
-        // Source: [9] - Clan affiliation (e.g., Valor, Immortal Flame)
         public int? ClanId { get; set; }
-        public Clan? Clan { get; set; }
+        [ForeignKey("ClanId")]
+        public virtual Clan? Clan { get; set; }
 
-        //anchor
         public int? GatewayId { get; set; }
-        public Gateway? Gateway { get; set; }
+        [ForeignKey("GatewayId")]
+        public virtual Gateway? Gateway { get; set; }
 
-        // Inventory & Summons
-        public int MemoryId { get; set; }
-        public List<Memory>? Memories { get; set; } // An Awakened can have multiple Memories (inventory)
-        public int EchoId { get; set; }
-        public List<Echo>? Echoes { get; set; } // An Awakened can have multiple Echoes (summons)
+        // --- Collections ---
+        public virtual ICollection<Memory> Memories { get; set; } = new List<Memory>();
+        public virtual ICollection<Echo> Echoes { get; set; } = new List<Echo>();
     }
 }

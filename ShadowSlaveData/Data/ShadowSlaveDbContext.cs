@@ -22,6 +22,7 @@ public class ShadowSlaveDbContext : DbContext
     // --- World Data ---
     public DbSet<Location> Locations { get; set; }
     public DbSet<NightmareCreature> NightmareCreatures { get; set; }
+    public DbSet<Gateway> Gateways { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +54,12 @@ public class ShadowSlaveDbContext : DbContext
             entity.HasOne(e => e.Clan)
                   .WithMany(c => c.Members)
                   .HasForeignKey(e => e.ClanId)
+                  .OnDelete(DeleteBehavior.SetNull);
+
+            // Gateway Relationship (Nullable)
+            entity.HasOne(e => e.Gateway)
+                  .WithMany(g => g.Awakeneds)
+                  .HasForeignKey(e => e.GatewayId)
                   .OnDelete(DeleteBehavior.SetNull);
         });
 
