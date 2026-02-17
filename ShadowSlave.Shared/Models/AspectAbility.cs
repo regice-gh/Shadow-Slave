@@ -1,11 +1,14 @@
-﻿namespace ShadowSlave.Shared.Models
+﻿using ShadowSlave.Shared.Enums;
+
+namespace ShadowSlave.Shared.Models
 {
     public class AspectAbility
     {
         public int Id { get; set; }
-        public string AspectAbilityName { get; set; } = string.Empty;
-        public string AspectAbilityDescription { get; set; } = string.Empty;
-        public string AspectAbilityType { get; set; } = string.Empty;
-        public string AspectAbilityRank { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty; // e.g., "Shadow Control", "Soul Flame"
+        public SoulRank UnlockRank { get; set; } // Dormant, Awakened, Ascended, etc.
+        public string EffectDescription { get; set; } = string.Empty;
+
+        public int AspectId { get; set; }
     }
 }

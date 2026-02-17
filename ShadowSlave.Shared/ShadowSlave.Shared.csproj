@@ -8,8 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Dto%27s\" />
-    <Folder Include="Enums\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,19 @@
-﻿namespace ShadowSlave.Shared.Models
+﻿using ShadowSlave.Shared.Enums;
+
+namespace ShadowSlave.Shared.Models
 {
     public class NightmareCreature
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public int Core { get; set; }
-        public string Rank { get; set; } = string.Empty;
-        public int SoulEssense { get; set; }
+        public string Name { get; set; } = string.Empty; // e.g., "Winter Beast"
+        public SoulRank Rank { get; set; } // Corrupted, Great, etc.
+        public SoulClass Class { get; set; } // Titan, Terror, etc.
 
+        // Abilities/Traits (e.g., Mind attacks, Physical immunity)
+        public string AbilitiesDescription { get; set; } = string.Empty;
 
-        public int Health { get; set; }
-        public int Strength { get; set; }
-        public int Agility { get; set; }
-        public int Intelligence { get; set; }
-        public int ExperiencePoints { get; set; }
+        // Drop Table logic
+        public int SoulShardsDrop { get; set; }
+        public bool HasMemoryDrop { get; set; }
     }
 }

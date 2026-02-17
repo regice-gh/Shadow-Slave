@@ -13,4 +13,12 @@
     <Folder Include="Security\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShadowSlave.Shared\ShadowSlave.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
